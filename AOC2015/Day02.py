@@ -13,12 +13,12 @@ def Day2_1(d):
 def Day2_2():
     total = 0
     for i in data:
-        print(i)
-        j = i.sort()
-        print(j)
+        i.sort()
+        total += (i[0]*2 + i[1]*2) + (i[0]*i[1]*i[2])
 
     print("AOC 2015 Day 2_2 answer:",total)
 
-d = open(r"C:\Users\michelle\python\AOC2015\Inputs\AOC02_1.txt", "r").readlines()
+#d = open(r"C:\Users\michelle\python\AOC2015\Inputs\AOC02_1.txt", "r").readlines()
+d = open(r"C:\Users\Shell\source\repos\Rauert\AOC2015\AOC2015\Inputs\AOC02_1.txt", "r").readlines()
 Day2_1(d)
 Day2_2()
