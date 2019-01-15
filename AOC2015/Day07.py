@@ -4,13 +4,14 @@ input = open(fileDir+"\Inputs\AOC07_1.txt", "r").read().splitlines()
 #input = open(fileDir+"\Test\AOC07_1.txt", "r").read().splitlines()
 d = {}
 
-for ii in input:
-    jj = re.split("\s->\s|\s",ii)
-    d[jj[len(jj)-1]]=jj[0:-1]
-print(d)
+def setup():
+    for ii in input:
+        jj = re.split("\s->\s|\s",ii)
+        d[jj[len(jj)-1]]=jj[0:-1]
+    #print(d)
 
 def evaluate(i):
-    print(i)
+    #print(i)
     if len(i) == 1:
         if str.isdigit(i[0]) == True:
             return int(i[0])
@@ -47,9 +48,13 @@ def evaluate(i):
 
 def canEvaluate(k):
     i = d[k]
+    #print(i)
     can = False
     if len(i) == 1:
-        if str.isdigit(i[0]) == True:
+        if isinstance(i[0],int) == True:
+            d[k] = i[0]
+            can = True
+        elif str.isdigit(i[0]) == True:
             d[k] = int(i[0])
             can = True
     elif len(i) == 2:
@@ -69,7 +74,7 @@ def canEvaluate(k):
         a,b = -1,-1
         if isinstance(i[0],int) == True:
             a = i[0]
-        elif str.isdigit(i[1]) == True:
+        elif str.isdigit(i[0]) == True:
             a = int(i[0])
         if isinstance(i[2],int) == True:
             b = i[2]
@@ -83,31 +88,40 @@ def canEvaluate(k):
             can = True
     return can
 
-def Part1():
+def run():
     seen = []
     while len(seen) != len(d):
-        print(len(seen), len(d))
-        print(d)
+        #print(len(seen), len(d))
+        #print(d)
+        #print(seen)
         for k,v in d.items():
             if k not in seen and canEvaluate(k) == True:
                 seen.append(k)
                 for kk,vv in d.items():
                     if k != kk:
                         if kk not in seen and k in vv:
-                            print(d[kk])
+                            #print(d[kk])
                             d[kk] = [x if x != k else d[k] for x in d[kk]]
-                            print(d[kk])
-
+                            #print(d[kk])
 
     #print("Part 1:", d["a"])
     #print("Part 1:", evaluate(d["f"]))
-    for k in d.keys():
-        print(k, d[k])
+    #for k in d.keys():
+        #print(k, d[k])
         #print(k, evaluate(d[k]))
 
-def Part2():
+def Part1():
+    setup()
+    run()
+    print("Part 1:", d["a"])
 
-    print("Part 2:")
+def Part2():
+    newB = d["a"]
+    setup()
+    d["b"] = [newB]
+    run()
+    print("Part 2:", d["a"])
+
 
 Part1()
 Part2()
