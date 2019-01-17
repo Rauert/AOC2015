@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\AOC2015"
+    "\\AOC2015",
+    "\\AOC2015\\Inputs",
+    "\\AOC2015\\Test"
   ],
-  "SelectedNode": "\\AOC2015\\Day05.py",
   "PreviewInSolutionExplorer": false
 }
