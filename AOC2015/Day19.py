@@ -1,4 +1,4 @@
-import os, time
+import os, time, re
 fileDir = os.path.dirname(os.path.abspath(__file__))   # Directory of the Module
 input = open(fileDir+"\Inputs\AOC19_1.txt", "r").read().splitlines()
 
@@ -19,18 +19,26 @@ for i in input:
 #    print(k,v)
 #print(m)
 
+def findChildren(inM):
+    distM = [] #Distinct Molecules
+    for k,v in d.items():
+        indices = ([(i.start(), i.end()) for i in re.finditer(k, inM)])
+        for i in indices:
+            for j in v:
+                mol = inM[0:i[0]] + j + inM[i[1]:]
+                if mol not in distM: distM.append(mol)
+    return distM
+
 def Part1():
     now = time.time()
-    distM = [] #Distinct Molecules
-    count = 0
-    for k in d.keys():
-        count += m.count(k) * len(d[k])
-    print("Time taken: ", count)
+    print("Part 1: ", len(findChildren(m)))
+    print("Time taken: " + str(time.time() - now))
 
 def Part2():
     now = time.time()
-    
-    print("Time taken: ")
+
+    print("Part 2: ")
+    print("Time taken: " + str(time.time() - now))
 
 Part1()
 Part2()
